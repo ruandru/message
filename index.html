@@ -97,9 +97,9 @@
                 <div class="btn" onclick="handleSearch()">查询号段</div>
             </div>
             <div class="switch">
-                <div class="item active" data-line="3" onclick="handleSearch()">线路一</div>
-                <div class="item" data-line="2" onclick="handleSearch()">线路二</div>
-                <div class="item" data-line="1" onclick="handleSearch()">线路三</div>
+                <div class="item active" data-line="3" onclick="handlechange('3')">线路一</div>
+                <div class="item" data-line="2" onclick="handlechange('2')">线路二</div>
+                <div class="item" data-line="1" onclick="handlechange('1')">线路三</div>
             </div> 
         </div>
         <div class="resultBox" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: flex-start;align-items: flex-start;">
@@ -115,6 +115,15 @@
 </html>
 
 <script>
+     (function(){
+            // tab线路切换
+            $(document).ready(function(){
+                $(".switch .item").click(function(){
+                    $(this).addClass("active").siblings().removeClass("active")
+                })
+           
+            })
+        })()
          function handleSearch(){
                 // let result="15010563358,18734883455,13213114413,13601224313,13904939026,15307495327,18705140000,13585170000,13736259982,13292997108,15232225583"
                 let result=$('#phone').val()
@@ -122,10 +131,28 @@
                     let resultStr=this.replaceStr(result);
                 let resultArr=resultStr.split(",")
                 let dataStyle=$(".active").attr("data-line");
-                console.log(resultArr)
-               let resultHtml=""
-               switch (dataStyle) {
-                    case "1":    
+                let resultHtml=this.switchChange(dataStyle,resultArr)
+                 $(".resultBox").html(resultHtml) 
+                }else{
+                    alert("请输入手机号码")
+                }
+            }
+            function handlechange(params){
+                let result=$('#phone').val()
+                if(result!=''){
+                let resultStr=this.replaceStr(result);
+                let resultArr=resultStr.split(",")
+                let resultHtml=this.switchChange(params,resultArr)
+                 $(".resultBox").html(resultHtml) 
+                }else{
+                    alert("请输入手机号码")
+                }
+            }
+            function switchChange(dataStyle,resultArr){
+                let resultHtml=""
+                switch (dataStyle) {
+                    case "1": 
+                    resultHtml=""   
                     resultArr.forEach(ele=>{
                         let html=`<div style="width:800px;height:280px;overflow:hidden;border:0px"> 
                              <div style="width:800px;height:280px;margin:-200px 0px 0px -10px;">
@@ -138,6 +165,7 @@
                         console.log(resultHtml)
                         break;
                     case "2":
+                    resultHtml=""
                     resultArr.forEach(ele=>{
                         let html=`<div style="width:300px;height:150px;overflow:hidden;border:0px"> 
                         <div style="width:300px;height:150px;margin:-190px 0px 0px -10px;">
@@ -149,6 +177,7 @@
                         })
                         break;
                     case "3":
+                    resultHtml=""
                     resultArr.forEach(ele=>{
                         let html=`<div style="width:300px;height:150px;overflow:hidden;border:0px"> 
                         <div style="width:300px;height:150px;margin:-400px 0px 0px -350px;">
@@ -160,11 +189,8 @@
                         })
                         break;
                 }
-               $(".resultBox").html(resultHtml) 
-                }else{
-                    alert("请输入手机号码")
-                }
-                
+                return resultHtml
+
             }
             function replaceStr(str) {
             // 将英文引号替换为中文引号
@@ -173,13 +199,5 @@
                 var val = str.replace(/，/g, ",")
                 return val;
             }
-        (function(){
-            // tab线路切换
-            $(document).ready(function(){
-                $(".switch .item").click(function(){
-                    $(this).addClass("active").siblings().removeClass("active")
-                })
-           
-            })
-        })()
+       
     </script>
