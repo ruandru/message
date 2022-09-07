@@ -101,6 +101,7 @@
                 <div class="item active" data-line="3" onclick="handlechange('3')">线路一</div>
                 <div class="item" data-line="2" onclick="handlechange('2')">线路二</div>
                 <div class="item" data-line="1" onclick="handlechange('1')">线路三</div>
+                <div class="item" data-line="4" onclick="handlechange('4')">线路四</div>
             </div> 
         </div>
         <div class="resultBox" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: flex-start;align-items: flex-start;">
@@ -183,6 +184,18 @@
                         let html=`<div style="width:300px;height:150px;overflow:hidden;border:0px"> 
                         <div style="width:300px;height:150px;margin:-400px 0px 0px -350px;">
                             <iFrame src="http://tools.2345.com//frame/black/mobile/${ele}" width="800" height="550" scrolling="no">
+                            </iFrame>
+                        </div> 
+                    </div> `
+                        resultHtml+=html    
+                        })
+                        break;
+                        case "4":
+                    resultHtml=""
+                    resultArr.forEach(ele=>{
+                        let html=`<div style="width:350px;height:200px;overflow:hidden;border:0px"> 
+                        <div style="width:350px;height:200px;margin:-220px 0px 0px 0px;">
+                            <iFrame src="http://www.ipuu.cn/mobile.html?mobile=${ele}&btn=%E6%9F%A5%E8%AF%A2" width="800" height="550" scrolling="no">
                             </iFrame>
                         </div> 
                     </div> `
